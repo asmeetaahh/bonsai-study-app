@@ -224,3 +224,11 @@ export function WandSparkleIcon(props) {
     </svg>
   )
 }
+
+export function SendIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <path d="M4 12 20 4l-6 16-3-7-7-3Z" />
+    </svg>
+  )
+}
