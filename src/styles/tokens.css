@@ -1,0 +1,115 @@
+/*
+  Bonsai design tokens.
+  Light = warm cream + soft pink + subtle sage green.
+  Dark  = near-black + pink/magenta, green kept minimal.
+  Switch themes by setting data-theme="light" | "dark" on <html>.
+*/
+
+:root {
+  color-scheme: light;
+
+  /* --- surfaces --- */
+  --bonsai-bg: #fdf8f3;
+  --bonsai-bg-elevated: #ffffff;
+  --bonsai-surface: #fbeee7;
+  --bonsai-surface-hover: #f6e0d6;
+  --bonsai-overlay: rgb(61 40 42 / 45%);
+
+  /* --- brand: pink --- */
+  --bonsai-primary: #e58fb3;
+  --bonsai-primary-strong: #d1638f;
+  --bonsai-primary-soft: #fbdfeb;
+  --bonsai-primary-softer: #fef1f6;
+
+  /* --- accent: sage green (used sparingly) --- */
+  --bonsai-accent-green: #8ba888;
+  --bonsai-accent-green-strong: #6d8f6a;
+  --bonsai-accent-green-soft: #e6efe2;
+
+  /* --- text --- */
+  --bonsai-text: #3d2b2e;
+  --bonsai-text-muted: #8c7268;
+  --bonsai-text-faint: #b8a89f;
+  --bonsai-text-inverse: #fdf8f3;
+
+  /* --- borders / lines --- */
+  --bonsai-border: #f0ddd2;
+  --bonsai-border-strong: #e4c6b7;
+
+  /* --- semantic --- */
+  --bonsai-success: #7bab7f;
+  --bonsai-warning: #e2ac5f;
+  --bonsai-danger: #dd8791;
+
+  /* --- shadow tint (hsl channel) --- */
+  --bonsai-shadow-tint: 350 55% 65%;
+  --bonsai-shadow-sm: 0 1px 3px hsl(var(--bonsai-shadow-tint) / 0.14);
+  --bonsai-shadow-md: 0 6px 20px -6px hsl(var(--bonsai-shadow-tint) / 0.22);
+  --bonsai-shadow-lg: 0 16px 40px -12px hsl(var(--bonsai-shadow-tint) / 0.28);
+  --bonsai-shadow-glow: 0 0 0 0 transparent;
+
+  /* --- radius --- */
+  --bonsai-radius-sm: 0.5rem;
+  --bonsai-radius-md: 0.875rem;
+  --bonsai-radius-lg: 1.25rem;
+  --bonsai-radius-xl: 1.75rem;
+  --bonsai-radius-full: 999px;
+
+  /* --- spacing scale (supplements Tailwind's default) --- */
+  --bonsai-space-3xs: 0.25rem;
+  --bonsai-space-2xs: 0.5rem;
+  --bonsai-space-xs: 0.75rem;
+  --bonsai-space-sm: 1rem;
+  --bonsai-space-md: 1.5rem;
+  --bonsai-space-lg: 2rem;
+  --bonsai-space-xl: 3rem;
+  --bonsai-space-2xl: 4rem;
+
+  /* --- typography --- */
+  --bonsai-font-display: 'Quicksand', 'Nunito', ui-rounded, sans-serif;
+  --bonsai-font-body: 'Nunito', 'Quicksand', ui-sans-serif, sans-serif;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* --- surfaces --- */
+  --bonsai-bg: #120a10;
+  --bonsai-bg-elevated: #1c1017;
+  --bonsai-surface: #24141e;
+  --bonsai-surface-hover: #301a28;
+  --bonsai-overlay: rgb(0 0 0 / 60%);
+
+  /* --- brand: pink / magenta --- */
+  --bonsai-primary: #ff6fa8;
+  --bonsai-primary-strong: #ff3f95;
+  --bonsai-primary-soft: #3a1830;
+  --bonsai-primary-softer: #2a1220;
+
+  /* --- accent: green, kept minimal in dark mode --- */
+  --bonsai-accent-green: #5c7a5a;
+  --bonsai-accent-green-strong: #7fa07c;
+  --bonsai-accent-green-soft: #182018;
+
+  /* --- text --- */
+  --bonsai-text: #f8e9f1;
+  --bonsai-text-muted: #c191ac;
+  --bonsai-text-faint: #7d5468;
+  --bonsai-text-inverse: #1c1017;
+
+  /* --- borders / lines --- */
+  --bonsai-border: #35202e;
+  --bonsai-border-strong: #472a3d;
+
+  /* --- semantic --- */
+  --bonsai-success: #6fcb8a;
+  --bonsai-warning: #e8b76b;
+  --bonsai-danger: #ff7d92;
+
+  /* --- shadow tint --- */
+  --bonsai-shadow-tint: 330 90% 60%;
+  --bonsai-shadow-sm: 0 1px 3px hsl(var(--bonsai-shadow-tint) / 0.3);
+  --bonsai-shadow-md: 0 6px 22px -6px hsl(var(--bonsai-shadow-tint) / 0.4);
+  --bonsai-shadow-lg: 0 18px 46px -14px hsl(var(--bonsai-shadow-tint) / 0.5);
+  --bonsai-shadow-glow: 0 0 24px 0 hsl(var(--bonsai-shadow-tint) / 0.35);
+}

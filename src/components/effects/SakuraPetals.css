@@ -1,0 +1,70 @@
+.sakura-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sakura-petal {
+  position: absolute;
+  top: -10%;
+  left: var(--sakura-left);
+  width: var(--sakura-size);
+  height: var(--sakura-size);
+  opacity: var(--sakura-opacity);
+  color: var(--sakura-tint, var(--color-primary));
+  filter: drop-shadow(0 2px 3px hsl(var(--bonsai-shadow-tint) / 0.25));
+  animation: sakura-fall var(--sakura-duration) linear var(--sakura-delay) infinite;
+  will-change: transform, opacity;
+}
+
+.sakura-petal svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  animation: sakura-spin var(--sakura-spin-duration) linear infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes sakura-fall {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  6% {
+    opacity: var(--sakura-opacity);
+  }
+  25% {
+    transform: translate3d(calc(var(--sakura-drift) * 0.4), 28vh, 0);
+  }
+  50% {
+    transform: translate3d(calc(var(--sakura-drift) * -0.5), 56vh, 0);
+  }
+  75% {
+    transform: translate3d(calc(var(--sakura-drift) * 0.6), 84vh, 0);
+  }
+  94% {
+    opacity: var(--sakura-opacity);
+  }
+  100% {
+    transform: translate3d(0, 112vh, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes sakura-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(var(--sakura-spin-dir, 360deg));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sakura-petal {
+    animation: none;
+    opacity: 0;
+  }
+}

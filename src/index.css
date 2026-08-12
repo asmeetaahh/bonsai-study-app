@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+@import "tailwindcss";
+@import "./styles/tokens.css";
+
+@theme inline {
+  /* surfaces */
+  --color-bg: var(--bonsai-bg);
+  --color-bg-elevated: var(--bonsai-bg-elevated);
+  --color-surface: var(--bonsai-surface);
+  --color-surface-hover: var(--bonsai-surface-hover);
+
+  /* brand */
+  --color-primary: var(--bonsai-primary);
+  --color-primary-strong: var(--bonsai-primary-strong);
+  --color-primary-soft: var(--bonsai-primary-soft);
+  --color-primary-softer: var(--bonsai-primary-softer);
+
+  /* accent green */
+  --color-accent-green: var(--bonsai-accent-green);
+  --color-accent-green-strong: var(--bonsai-accent-green-strong);
+  --color-accent-green-soft: var(--bonsai-accent-green-soft);
+
+  /* text */
+  --color-text: var(--bonsai-text);
+  --color-text-muted: var(--bonsai-text-muted);
+  --color-text-faint: var(--bonsai-text-faint);
+  --color-text-inverse: var(--bonsai-text-inverse);
+
+  /* borders */
+  --color-border: var(--bonsai-border);
+  --color-border-strong: var(--bonsai-border-strong);
+
+  /* semantic */
+  --color-success: var(--bonsai-success);
+  --color-warning: var(--bonsai-warning);
+  --color-danger: var(--bonsai-danger);
+
+  /* typography */
+  --font-display: var(--bonsai-font-display);
+  --font-body: var(--bonsai-font-body);
+
+  /* radius */
+  --radius-sm: var(--bonsai-radius-sm);
+  --radius-md: var(--bonsai-radius-md);
+  --radius-lg: var(--bonsai-radius-lg);
+  --radius-xl: var(--bonsai-radius-xl);
+  --radius-full: var(--bonsai-radius-full);
+
+  /* shadow */
+  --shadow-sm: var(--bonsai-shadow-sm);
+  --shadow-md: var(--bonsai-shadow-md);
+  --shadow-lg: var(--bonsai-shadow-lg);
+  --shadow-glow: var(--bonsai-shadow-glow);
+
+  /* spacing extras */
+  --spacing-3xs: var(--bonsai-space-3xs);
+  --spacing-2xs: var(--bonsai-space-2xs);
+  --spacing-xs: var(--bonsai-space-xs);
+}
+
+@layer base {
+  html {
+    color-scheme: light dark;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+
+  ::selection {
+    background-color: var(--color-primary-soft);
+    color: var(--color-primary-strong);
+  }
+}
