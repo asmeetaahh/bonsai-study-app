@@ -1,121 +1,38 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { AppShell } from './components/layout'
+import { Card } from './components/ui'
+import { HomeIcon, BookIcon, ChartIcon, SettingsIcon, LeafIcon } from './components/icons'
+import { Dashboard } from './pages/Dashboard'
+
+const NAV_ITEMS = [
+  { id: 'dashboard', label: 'Dashboard', icon: HomeIcon },
+  { id: 'study', label: 'Study', icon: BookIcon },
+  { id: 'progress', label: 'Progress', icon: ChartIcon },
+  { id: 'settings', label: 'Settings', icon: SettingsIcon },
+]
+
+function ComingSoon({ label }) {
+  return (
+    <Card className="flex flex-col items-center gap-3 py-16 text-center">
+      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-soft text-primary-strong">
+        <LeafIcon size={22} />
+      </span>
+      <div>
+        <p className="font-display text-lg font-semibold text-text">{label} is still growing</p>
+        <p className="text-sm text-text-muted">This page is coming soon.</p>
+      </div>
+    </Card>
+  )
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeId, setActiveId] = useState('dashboard')
+  const activeLabel = NAV_ITEMS.find((item) => item.id === activeId)?.label
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    <AppShell navItems={NAV_ITEMS} activeId={activeId} onNavigate={setActiveId} brand="Bonsai">
+      {activeId === 'dashboard' ? <Dashboard /> : <ComingSoon label={activeLabel} />}
+    </AppShell>
   )
 }
 
