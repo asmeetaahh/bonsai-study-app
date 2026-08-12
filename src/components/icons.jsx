@@ -241,3 +241,29 @@ export function LockIcon(props) {
     </svg>
   )
 }
+
+export function PlayIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <path d="M8 5.5v13l11-6.5-11-6.5Z" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+export function PauseIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <rect x="7" y="5" width="4" height="14" rx="1.4" fill="currentColor" stroke="none" />
+      <rect x="13" y="5" width="4" height="14" rx="1.4" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+export function ResetIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <path d="M4 12a8 8 0 1 1 2.5 5.8" />
+      <path d="M4 17v-5h5" />
+    </svg>
+  )
+}

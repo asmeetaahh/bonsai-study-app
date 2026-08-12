@@ -17,6 +17,7 @@ import { Planner } from './pages/Planner'
 import { Tracker } from './pages/Tracker'
 import { AiSensei } from './pages/AiSensei'
 import { Milestones } from './pages/Milestones'
+import { Pomodoro } from './pages/Pomodoro'
 
 const NAV_ITEMS = [
   { id: 'dashboard', label: 'Dashboard', icon: HomeIcon },
@@ -54,7 +55,8 @@ function App() {
       {activeId === 'tracker' && <Tracker />}
       {activeId === 'ai-sensei' && <AiSensei />}
       {activeId === 'milestones' && <Milestones />}
-      {!['dashboard', 'planner', 'tracker', 'ai-sensei', 'milestones'].includes(activeId) && (
+      {activeId === 'pomodoro' && <Pomodoro />}
+      {!['dashboard', 'planner', 'tracker', 'ai-sensei', 'milestones', 'pomodoro'].includes(activeId) && (
         <ComingSoon label={activeLabel} />
       )}
     </AppShell>
