@@ -117,6 +117,23 @@ export function ChevronRightIcon(props) {
   )
 }
 
+export function ChevronLeftIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <path d="M15 6l-6 6 6 6" />
+    </svg>
+  )
+}
+
+export function PlusIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <path d="M12 5v14" />
+      <path d="M5 12h14" />
+    </svg>
+  )
+}
+
 export function FlameIcon(props) {
   return (
     <svg {...base(props)} className={props.className}>

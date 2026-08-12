@@ -13,6 +13,7 @@ import {
   LeafIcon,
 } from './components/icons'
 import { Dashboard } from './pages/Dashboard'
+import { Planner } from './pages/Planner'
 
 const NAV_ITEMS = [
   { id: 'dashboard', label: 'Dashboard', icon: HomeIcon },
@@ -45,7 +46,9 @@ function App() {
 
   return (
     <AppShell navItems={NAV_ITEMS} activeId={activeId} onNavigate={setActiveId} brand="Bonsai">
-      {activeId === 'dashboard' ? <Dashboard /> : <ComingSoon label={activeLabel} />}
+      {activeId === 'dashboard' && <Dashboard />}
+      {activeId === 'planner' && <Planner />}
+      {activeId !== 'dashboard' && activeId !== 'planner' && <ComingSoon label={activeLabel} />}
     </AppShell>
   )
 }
