@@ -1,13 +1,27 @@
 import { useState } from 'react'
 import { AppShell } from './components/layout'
 import { Card } from './components/ui'
-import { HomeIcon, BookIcon, ChartIcon, SettingsIcon, LeafIcon } from './components/icons'
+import {
+  HomeIcon,
+  CalendarIcon,
+  ChartIcon,
+  WandSparkleIcon,
+  TrophyIcon,
+  TomatoIcon,
+  GameControllerIcon,
+  SettingsIcon,
+  LeafIcon,
+} from './components/icons'
 import { Dashboard } from './pages/Dashboard'
 
 const NAV_ITEMS = [
   { id: 'dashboard', label: 'Dashboard', icon: HomeIcon },
-  { id: 'study', label: 'Study', icon: BookIcon },
-  { id: 'progress', label: 'Progress', icon: ChartIcon },
+  { id: 'planner', label: 'Planner', icon: CalendarIcon },
+  { id: 'tracker', label: 'Tracker', icon: ChartIcon },
+  { id: 'ai-sensei', label: 'AI Sensei', icon: WandSparkleIcon },
+  { id: 'milestones', label: 'Milestones', icon: TrophyIcon },
+  { id: 'pomodoro', label: 'Pomodoro', icon: TomatoIcon },
+  { id: 'game', label: 'Game', icon: GameControllerIcon },
   { id: 'settings', label: 'Settings', icon: SettingsIcon },
 ]
 

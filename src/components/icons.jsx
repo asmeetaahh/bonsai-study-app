@@ -151,3 +151,59 @@ export function TrendDownIcon(props) {
     </svg>
   )
 }
+
+export function CalendarIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <rect x="3.5" y="5" width="17" height="15.5" rx="2.5" />
+      <path d="M3.5 9.5h17" />
+      <path d="M8 3v3.5" />
+      <path d="M16 3v3.5" />
+    </svg>
+  )
+}
+
+export function TrophyIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <path d="M7 4h10v5.5a5 5 0 0 1-10 0V4Z" />
+      <path d="M7 5.5H4.5a1 1 0 0 0-1 1V8a3 3 0 0 0 3 3" />
+      <path d="M17 5.5h2.5a1 1 0 0 1 1 1V8a3 3 0 0 1-3 3" />
+      <path d="M12 14.5V17" />
+      <path d="M8.5 20.5h7" />
+      <path d="M9.5 17.5h5l.7 3h-6.4l.7-3Z" />
+    </svg>
+  )
+}
+
+export function TomatoIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <path d="M12 8.5c4.5 0 7.5 3 7.5 6.5S16.5 20.5 12 20.5 4.5 18.5 4.5 15 7.5 8.5 12 8.5Z" />
+      <path d="M12 8.5V6" />
+      <path d="M9 6.2c.6-1.4 2-2.2 3-2.2s2.4.8 3 2.2" />
+    </svg>
+  )
+}
+
+export function GameControllerIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <path d="M7 8.5h10a4 4 0 0 1 3.9 4.9l-.6 2.5a2.6 2.6 0 0 1-4.7 1L14.5 15h-5l-1.1 1.9a2.6 2.6 0 0 1-4.7-1l-.6-2.5A4 4 0 0 1 7 8.5Z" />
+      <path d="M8.3 11v3" />
+      <path d="M6.8 12.5h3" />
+      <circle cx="16" cy="11.3" r="0.9" fill="currentColor" stroke="none" />
+      <circle cx="17.8" cy="13" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+export function WandSparkleIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <path d="M4.5 19.5 15 9" />
+      <path d="M13 6.3l1 2 2 1-2 1-1 2-1-2-2-1 2-1 1-2Z" />
+      <path d="M19 3.5l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4L17.5 5l1.4-.6.6-1.4Z" />
+    </svg>
+  )
+}

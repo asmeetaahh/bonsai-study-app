@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import './SakuraPetals.css'
 
-function PetalShape() {
+export function PetalShape({ className = '' }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
       <path
         d="M12 2c-1.6 0-2.2 1.1-2.2 1.1S5 5 3.2 9.4C1.9 12.6 2.6 16 5 18.4 7 20.4 9.4 21.5 12 21.5s5-1.1 7-3.1c2.4-2.4 3.1-5.8 1.8-9C19 5 14.2 3.1 14.2 3.1S13.6 2 12 2Z"
         opacity="0.95"
