@@ -11,28 +11,13 @@ import {
   LeafIcon,
 } from '../components/icons'
 import { PetalShape } from '../components/effects/SakuraPetals'
-
-const CATEGORIES = ['Math', 'Biology', 'English', 'History', 'Chemistry', 'Personal']
-const PRIORITIES = ['low', 'medium', 'high']
+import { CATEGORIES, PRIORITIES, usePlannerTasks } from '../data/plannerStore'
 
 const PRIORITY_BADGE = {
   high: { variant: 'danger', label: 'High' },
   medium: { variant: 'warning', label: 'Medium' },
   low: { variant: 'neutral', label: 'Low' },
 }
-
-const INITIAL_TASKS = [
-  { id: 1, title: 'Read chapter 5', category: 'Biology', priority: 'low', done: true, date: '2026-08-10' },
-  { id: 2, title: 'Practice vocab set', category: 'English', priority: 'medium', done: true, date: '2026-08-11' },
-  { id: 3, title: 'Algebra worksheet', category: 'Math', priority: 'high', done: true, date: '2026-08-12' },
-  { id: 4, title: 'Review flashcards', category: 'Biology', priority: 'medium', done: true, date: '2026-08-13' },
-  { id: 5, title: 'Practice essay outline', category: 'English', priority: 'high', done: false, date: '2026-08-13' },
-  { id: 6, title: 'Solve 10 calculus problems', category: 'Math', priority: 'high', done: false, date: '2026-08-13' },
-  { id: 7, title: 'Read chapter 7 notes', category: 'History', priority: 'low', done: false, date: '2026-08-13' },
-  { id: 8, title: 'Chemistry lab prep', category: 'Chemistry', priority: 'medium', done: false, date: '2026-08-14' },
-  { id: 9, title: 'Mock test review', category: 'Math', priority: 'high', done: false, date: '2026-08-15' },
-  { id: 10, title: 'Weekly reflection journal', category: 'Personal', priority: 'low', done: false, date: '2026-08-16' },
-]
 
 const SESSIONS = [
   { id: 1, subject: 'Calculus review', date: '2026-08-13', time: '4:30 PM', duration: '45 min' },
@@ -67,7 +52,7 @@ export function Planner() {
   const realToday = useMemo(() => new Date(), [])
   const [viewMode, setViewMode] = useState('today')
   const [selectedDate, setSelectedDate] = useState(realToday)
-  const [tasks, setTasks] = useState(INITIAL_TASKS)
+  const { tasks, addTask, toggleTask, deleteTask } = usePlannerTasks()
   const [showAddForm, setShowAddForm] = useState(false)
   const [draft, setDraft] = useState({ title: '', category: CATEGORIES[0], priority: 'medium' })
 
@@ -100,10 +85,6 @@ export function Planner() {
           6,
         ).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}`
 
-  const toggleTask = (id) => {
-    setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)))
-  }
-
   const stepDate = (dir) => {
     setSelectedDate((prev) => addDays(prev, viewMode === 'today' ? dir : dir * 7))
   }
@@ -111,17 +92,12 @@ export function Planner() {
   const submitTask = (e) => {
     e.preventDefault()
     if (!draft.title.trim()) return
-    setTasks((prev) => [
-      ...prev,
-      {
-        id: Date.now(),
-        title: draft.title.trim(),
-        category: draft.category,
-        priority: draft.priority,
-        done: false,
-        date: dayKey,
-      },
-    ])
+    addTask({
+      title: draft.title.trim(),
+      category: draft.category,
+      priority: draft.priority,
+      date: dayKey,
+    })
     setDraft({ title: '', category: CATEGORIES[0], priority: 'medium' })
     setShowAddForm(false)
   }
@@ -274,6 +250,8 @@ export function Planner() {
                   subtitle={task.category}
                   completed={task.done}
                   onToggle={() => toggleTask(task.id)}
+                  onDelete={() => deleteTask(task.id)}
+                  meta={task.time || undefined}
                   badge={
                     <Badge variant={PRIORITY_BADGE[task.priority].variant} size="sm">
                       {PRIORITY_BADGE[task.priority].label}
@@ -310,6 +288,8 @@ export function Planner() {
                             subtitle={task.category}
                             completed={task.done}
                             onToggle={() => toggleTask(task.id)}
+                            onDelete={() => deleteTask(task.id)}
+                            meta={task.time || undefined}
                             badge={
                               <Badge variant={PRIORITY_BADGE[task.priority].variant} size="sm">
                                 {PRIORITY_BADGE[task.priority].label}

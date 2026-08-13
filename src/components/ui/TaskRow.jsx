@@ -1,4 +1,4 @@
-import { CheckIcon } from '../icons'
+import { CheckIcon, CloseIcon } from '../icons'
 
 export function TaskRow({
   title,
@@ -7,6 +7,7 @@ export function TaskRow({
   completed = false,
   onToggle,
   badge,
+  onDelete,
   className = '',
 }) {
   return (
@@ -51,6 +52,16 @@ export function TaskRow({
         <span className="shrink-0 text-sm text-text-muted whitespace-nowrap">
           {meta}
         </span>
+      )}
+      {onDelete && (
+        <button
+          type="button"
+          onClick={onDelete}
+          aria-label="Delete task"
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-text-faint transition-colors duration-150 hover:bg-danger/10 hover:text-danger"
+        >
+          <CloseIcon size={14} />
+        </button>
       )}
     </div>
   )
