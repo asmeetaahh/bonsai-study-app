@@ -55,7 +55,6 @@
   /* spacing extras */
   --spacing-3xs: var(--bonsai-space-3xs);
   --spacing-2xs: var(--bonsai-space-2xs);
-  --spacing-xs: var(--bonsai-space-xs);
 }
 
 @layer base {
