@@ -12,6 +12,7 @@ import {
 } from '../components/icons'
 import { PetalShape } from '../components/effects/SakuraPetals'
 import { CATEGORIES, PRIORITIES, usePlannerTasks } from '../data/plannerStore'
+import { toKey, addDays, startOfWeek, isSameDay } from '../lib/date'
 
 const PRIORITY_BADGE = {
   high: { variant: 'danger', label: 'High' },
@@ -27,26 +28,6 @@ const SESSIONS = [
 ]
 
 const STUDY_HOURS = { logged: 5.1, goal: 7.5 }
-
-function toKey(date) {
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
-}
-
-function addDays(date, amount) {
-  const next = new Date(date)
-  next.setDate(next.getDate() + amount)
-  return next
-}
-
-function startOfWeek(date) {
-  const d = new Date(date)
-  const day = (d.getDay() + 6) % 7 // 0 = Monday
-  return addDays(d, -day)
-}
-
-function isSameDay(a, b) {
-  return toKey(a) === toKey(b)
-}
 
 export function Planner() {
   const realToday = useMemo(() => new Date(), [])

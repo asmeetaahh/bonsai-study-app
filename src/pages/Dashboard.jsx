@@ -1,28 +1,31 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Button, Card, CardHeader, CardFooter, Badge, ProgressBar, TaskRow, StatTile } from '../components/ui'
 import { BookIcon, ChartIcon, FlameIcon, LeafIcon, ChevronRightIcon } from '../components/icons'
 import { BonsaiMascot, LevelRing } from '../components/illustrations'
 import { PetalShape } from '../components/effects/SakuraPetals'
-
-const INITIAL_TASKS = [
-  { id: 1, title: 'Review flashcards', subtitle: 'Biology · Ch. 4', done: true },
-  { id: 2, title: 'Practice essay outline', subtitle: 'English', done: false },
-  { id: 3, title: 'Solve 10 calculus problems', subtitle: 'Math', done: false },
-  { id: 4, title: 'Read chapter 7 notes', subtitle: 'History', done: false },
-]
+import { usePlannerTasks } from '../data/plannerStore'
+import { toKey, addDays, startOfWeek } from '../lib/date'
 
 export function Dashboard({ userName = 'Asmita' }) {
-  const [tasks, setTasks] = useState(INITIAL_TASKS)
+  const now = useMemo(() => new Date(), [])
+  const { tasks, toggleTask } = usePlannerTasks()
 
   const today = useMemo(
-    () => new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }),
-    [],
+    () => now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }),
+    [now],
   )
-  const remaining = tasks.filter((t) => !t.done).length
 
-  const toggleTask = (id) => {
-    setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)))
-  }
+  const todayKey = useMemo(() => toKey(now), [now])
+  const todayTasks = useMemo(() => tasks.filter((t) => t.date === todayKey), [tasks, todayKey])
+  const remaining = todayTasks.filter((t) => !t.done).length
+
+  const weekKeys = useMemo(() => {
+    const start = startOfWeek(now)
+    return Array.from({ length: 7 }, (_, i) => toKey(addDays(start, i)))
+  }, [now])
+  const weekTasks = useMemo(() => tasks.filter((t) => weekKeys.includes(t.date)), [tasks, weekKeys])
+  const weekCompleted = weekTasks.filter((t) => t.done).length
+  const weekPercent = weekTasks.length ? (weekCompleted / weekTasks.length) * 100 : 0
 
   return (
     <div className="flex flex-col gap-6">
@@ -85,11 +88,11 @@ export function Dashboard({ userName = 'Asmita' }) {
             }
           />
           <div className="flex flex-col">
-            {tasks.map((task) => (
+            {todayTasks.map((task) => (
               <TaskRow
                 key={task.id}
                 title={task.title}
-                subtitle={task.subtitle}
+                subtitle={task.category}
                 completed={task.done}
                 onToggle={() => toggleTask(task.id)}
               />
@@ -100,16 +103,16 @@ export function Dashboard({ userName = 'Asmita' }) {
               + Add task
             </Button>
             <span className="text-sm text-text-muted">
-              {tasks.length - remaining}/{tasks.length} done
+              {todayTasks.length - remaining}/{todayTasks.length} done
             </span>
           </CardFooter>
         </Card>
 
         <div className="flex flex-col gap-6">
           <Card>
-            <ProgressBar value={68} label="Weekly goal" showValue variant="gradient" />
+            <ProgressBar value={weekPercent} label="Weekly goal" showValue variant="gradient" />
             <p className="mt-3 text-sm text-text-muted">
-              5.1 of 7.5 hours studied this week
+              {weekCompleted}/{weekTasks.length} tasks completed this week
             </p>
           </Card>
 
