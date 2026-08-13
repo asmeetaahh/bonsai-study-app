@@ -267,3 +267,31 @@ export function ResetIcon(props) {
     </svg>
   )
 }
+
+export function BellIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <path d="M6 10.5a6 6 0 0 1 12 0c0 3.2 1 5 1.8 6H4.2c.8-1 1.8-2.8 1.8-6Z" />
+      <path d="M10 19a2 2 0 0 0 4 0" />
+    </svg>
+  )
+}
+
+export function UserIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <circle cx="12" cy="8.5" r="3.5" />
+      <path d="M4.5 20c1-3.8 4.2-6 7.5-6s6.5 2.2 7.5 6" />
+    </svg>
+  )
+}
+
+export function InfoIcon(props) {
+  return (
+    <svg {...base(props)} className={props.className}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 11v5.5" />
+      <circle cx="12" cy="8" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}

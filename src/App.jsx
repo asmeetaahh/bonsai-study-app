@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AppShell } from './components/layout'
 import { Card } from './components/ui'
 import {
@@ -19,6 +19,15 @@ import { AiSensei } from './pages/AiSensei'
 import { Milestones } from './pages/Milestones'
 import { Pomodoro } from './pages/Pomodoro'
 import { GameZone } from './pages/GameZone'
+import { Settings } from './pages/Settings'
+
+const SAKURA_ENABLED_KEY = 'bonsai-sakura-enabled'
+const REDUCED_MOTION_KEY = 'bonsai-reduced-motion'
+
+function loadBoolean(key, fallback) {
+  const stored = window.localStorage.getItem(key)
+  return stored === null ? fallback : stored === 'true'
+}
 
 const NAV_ITEMS = [
   { id: 'dashboard', label: 'Dashboard', icon: HomeIcon },
@@ -49,8 +58,27 @@ function App() {
   const [activeId, setActiveId] = useState('dashboard')
   const activeLabel = NAV_ITEMS.find((item) => item.id === activeId)?.label
 
+  const [sakuraEnabled, setSakuraEnabled] = useState(() => loadBoolean(SAKURA_ENABLED_KEY, true))
+  const [reducedMotion, setReducedMotion] = useState(() =>
+    loadBoolean(REDUCED_MOTION_KEY, window.matchMedia('(prefers-reduced-motion: reduce)').matches),
+  )
+
+  useEffect(() => {
+    window.localStorage.setItem(SAKURA_ENABLED_KEY, String(sakuraEnabled))
+  }, [sakuraEnabled])
+
+  useEffect(() => {
+    window.localStorage.setItem(REDUCED_MOTION_KEY, String(reducedMotion))
+  }, [reducedMotion])
+
   return (
-    <AppShell navItems={NAV_ITEMS} activeId={activeId} onNavigate={setActiveId} brand="Bonsai">
+    <AppShell
+      navItems={NAV_ITEMS}
+      activeId={activeId}
+      onNavigate={setActiveId}
+      brand="Bonsai"
+      showPetals={sakuraEnabled && !reducedMotion}
+    >
       {activeId === 'dashboard' && <Dashboard />}
       {activeId === 'planner' && <Planner />}
       {activeId === 'tracker' && <Tracker />}
@@ -58,6 +86,14 @@ function App() {
       {activeId === 'milestones' && <Milestones />}
       {activeId === 'pomodoro' && <Pomodoro />}
       {activeId === 'game' && <GameZone />}
+      {activeId === 'settings' && (
+        <Settings
+          sakuraEnabled={sakuraEnabled}
+          onSakuraEnabledChange={setSakuraEnabled}
+          reducedMotion={reducedMotion}
+          onReducedMotionChange={setReducedMotion}
+        />
+      )}
       {![
         'dashboard',
         'planner',
@@ -66,6 +102,7 @@ function App() {
         'milestones',
         'pomodoro',
         'game',
+        'settings',
       ].includes(activeId) && <ComingSoon label={activeLabel} />}
     </AppShell>
   )
