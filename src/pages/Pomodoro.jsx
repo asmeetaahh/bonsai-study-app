@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Card, CardHeader, Button, StatTile } from '../components/ui'
 import { PlayIcon, PauseIcon, ResetIcon, FlameIcon, ChartIcon, CalendarIcon, CheckIcon } from '../components/icons'
 import { PetalShape } from '../components/effects/SakuraPetals'
+import { recordSession } from '../data/studySessionStore'
 
 const MODES = {
   focus: { label: 'Focus', minutes: 25 },
@@ -88,6 +89,7 @@ export function Pomodoro() {
     )
 
     if (finishedMode === 'focus') {
+      recordSession({ type: 'focus', minutes })
       setTodayFocusCount((c) => c + 1)
       setTodayFocusMinutes((m) => m + minutes)
       const nextCycles = cyclesSoFar + 1
